@@ -1,191 +1,599 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>iOS Classic Alert</title>
-
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverSpoke | senior bicycles</title>
+  <!-- Google Fonts for clean, readable typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-
-        background: url('https://content.jdmagicbox.com/v2/comp/pune/n4/020pxx20.xx20.250826161117.a8n4/catalogue/apple-store-kopa-mall-koregaon-park-pune-mobile-phone-dealers-fjxrl6t6th.jpg')
-                    no-repeat center center fixed;
-        background-size: cover;
-
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+      font-family: 'Inter', sans-serif;
+      background-color: #fbf9f5;  /* soft warm white */
+      color: #2d2f31;
+      line-height: 1.5;
     }
-
-    .overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.35);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
-
-    .ios-alert {
-        width: 82%;
-        max-width: 320px;
-        background: #ffffff;
-        border-radius: 14px;
-        box-shadow: 0px 22px 45px rgba(0,0,0,0.45);
-        text-align: center;
-        padding-top: 18px;
-        transform: scale(1.12);
-        opacity: 0;
-        animation: iosPop 0.25s cubic-bezier(.25,.8,.25,1) forwards;
-        cursor: pointer;
+    /* navigation */
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 2px 6px rgba(0,40,20,0.05);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #e9e1d5;
     }
-
-    @keyframes iosPop {
-        0% { transform: scale(1.12); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
-
-    .alert-title {
-        font-size: 18px;
-        font-weight: 600;
-        color: #111;
-        margin-bottom: 8px;
-        padding: 0 18px;
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-
-    .alert-message {
-        font-size: 14px;
-        color: #3b3b3b;
-        padding: 0 20px 20px 20px;
-        line-height: 1.45;
+    .logo-icon {
+      font-size: 2rem;
+      color: #2b6c5c;  /* muted teal */
     }
-
-    .buttons {
-        border-top: 1px solid #d0d0d0;
-        display: flex;
-        height: 44px;
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.7rem;
+      letter-spacing: -0.5px;
+      color: #1f4e43;
     }
-
-    .buttons a {
-        flex: 1;
-        text-decoration: none;
-        font-size: 17px;
-        color: #007aff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .logo-text span {
+      font-weight: 400;
+      color: #6f5e4d;
+      font-size: 1.3rem;
     }
-
-    .buttons a:nth-child(1) {
-        border-right: 1px solid #d0d0d0;
+    .nav-links {
+      display: flex;
+      gap: 32px;
     }
-
-    /* CALL BAR FOOTER */
-    .call-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #007aff;
-        color: #fff;
-        text-align: center;
-        padding: 16px;
-        font-size: 18px;
-        font-weight: 600;
-        text-decoration: none;
-        z-index: 20;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #3e4f4a;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
     }
-</style>
+    .nav-links a:hover, .nav-links a.active {
+      color: #1d6b58;
+      border-bottom-color: #1d6b58;
+    }
+    /* page sections general */
+    .page-section {
+      padding: 56px 0;
+    }
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #1e3d35;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1e3d35;
+      margin-bottom: 24px;
+    }
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #2a4d44;
+      margin-bottom: 16px;
+    }
+    p, li {
+      font-size: 1.1rem;
+      color: #3d4944;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 32px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 25px rgba(0, 40, 30, 0.05);
+      border: 1px solid #e6dbcf;
+      transition: transform 0.15s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: #b0ccc2;
+    }
+    .feature-icon {
+      font-size: 2.6rem;
+      color: #2b6c5c;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #1d6b58;
+      color: white;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(0,70,50,0.1);
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover {
+      background-color: #134e40;
+      box-shadow: 0 10px 22px rgba(0,80,60,0.2);
+    }
+    .btn-small {
+      padding: 10px 26px;
+      font-size: 1rem;
+    }
+    .hero-split {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .hero-left {
+      flex: 1 1 300px;
+    }
+    .hero-right {
+      flex: 1 1 300px;
+      background: #dde9e2;
+      border-radius: 60px;
+      padding: 40px 30px;
+      text-align: center;
+      color: #1e3d35;
+      border: 2px solid #c3d9ce;
+    }
+    .hero-right i {
+      font-size: 5rem;
+      color: #2a5e50;
+      margin-bottom: 20px;
+    }
+    .legal-text {
+      background: white;
+      border-radius: 32px;
+      padding: 40px;
+      border: 1px solid #e0d6c8;
+      margin-top: 30px;
+    }
+    .legal-text p, .legal-text li {
+      margin-bottom: 16px;
+    }
+    .legal-text ul {
+      padding-left: 30px;
+    }
+    hr {
+      border: none;
+      border-top: 2px dashed #cdc3b5;
+      margin: 32px 0;
+    }
+    footer {
+      background: #e2eee8;
+      padding: 32px 0;
+      border-top: 2px solid #c2d2c7;
+      color: #1f463c;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .footer-links a {
+      color: #1f4e43;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    /* page visibility */
+    .page {
+      display: none;
+    }
+    .page.active-page {
+      display: block;
+    }
+    /* tabs for legal (privacy/terms) + refund & contact now separate pages */
+    .tab-link {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 10px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      color: #3a5a50;
+      background: #eff6f2;
+      margin-right: 12px;
+      border: 1px solid #c7dbd0;
+    }
+    .tab-link.active-tab {
+      background: #1d6b58;
+      color: white;
+      border-color: #1d6b58;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active-tab-content {
+      display: block;
+    }
+    .contact-details {
+      background: white;
+      border-radius: 32px;
+      padding: 40px;
+      border: 1px solid #d4cdbe;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #eee7dd;
+      padding-bottom: 20px;
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: #dde9e2;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d6b58;
+      font-size: 1.6rem;
+    }
+    @media (max-width: 700px) {
+      .nav-container { flex-direction: column; gap: 16px; }
+      .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="overlay" id="overlay">
-    <div class="ios-alert" id="alertBox">
-        <div class="alert-title">Apple Support</div>
-        <div class="alert-message">Your iPhone has been locked due to detected illegal Child pornography. Your Apple ID has been disabled. Immediately call Online Security Support +1-805-248-6780 to unlock it.</div>
-
-        <div class="buttons">
-            <a href="tel:+18052486780">Cancel</a>
-            <a href="tel:+18052486780">Call Now</a>
-        </div>
+  <!-- fixed navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo-area">
+        <i class="fas fa-bicycle logo-icon"></i>
+        <div class="logo-text">SilverSpoke <span>senior bicycles</span></div>
+      </div>
+      <div class="nav-links">
+        <a href="#" data-page="home" class="nav-link active">Home</a>
+        <a href="#" data-page="about" class="nav-link">About us</a>
+        <a href="#" data-page="privacy-terms" class="nav-link">Privacy & terms</a>
+        <a href="#" data-page="refund" class="nav-link">Refund policy</a>
+        <a href="#" data-page="contact" class="nav-link">Contact</a>
+      </div>
     </div>
-</div>
+  </nav>
 
-<!-- FOOTER CALL BAR WITH TOLL-FREE NUMBER -->
-<a class="call-bar" href="tel:+18052486780">📞 Call Toll-Free: 1-808-277-4439</a>
+  <!-- HOME PAGE -->
+  <section id="home-page" class="page active-page">
+    <div class="container page-section">
+      <div class="hero-split">
+        <div class="hero-left">
+          <h1>Freedom on two wheels —<br>engineered for the golden years</h1>
+          <p style="font-size: 1.3rem; margin-bottom: 32px;">Stable, lightweight, and joyful e-bikes for seniors who refuse to slow down. Step‑through frames, puncture‑proof tires, and confidence‑boosting stability.</p>
+          <a href="#" class="btn"><i class="fas fa-chevron-circle-right" style="margin-right: 8px;"></i>Find your ride</a>
+          <p style="margin-top: 24px;"><i class="fas fa-shield-alt" style="color: #1d6b58;"></i>  30‑day test ride · free shipping · senior discounts</p>
+        </div>
+        <div class="hero-right">
+          <i class="fas fa-person-walking"></i> <i class="fas fa-arrow-right-long"></i> <i class="fas fa-bicycle"></i>
+          <h3 style="margin: 20px 0 10px;">Easy balance · No strain</h3>
+          <p>Ultra-low standover height, ergonomic grips, and integrated LED lights. More rides, more smiles.</p>
+          <div style="background: white; border-radius: 60px; padding: 16px 8px; margin-top: 24px;">
+            <i class="fas fa-star" style="color: #e6b422;"></i><i class="fas fa-star" style="color: #e6b422;"></i><i class="fas fa-star" style="color: #e6b422;"></i><i class="fas fa-star" style="color: #e6b422;"></i><i class="fas fa-star" style="color: #e6b422;"></i>
+            <span style="font-weight: 700;"> 1200+ happy seniors</span>
+          </div>
+        </div>
+      </div>
 
-<script>
-window.onload = function() {
+      <!-- features grid (for home) -->
+      <h2 style="margin-top: 80px;">Why seniors choose SilverSpoke</h2>
+      <div class="card-grid">
+        <div class="feature-card">
+          <i class="fas fa-dragon feature-icon"></i>
+          <h3>Step‑through serenity</h3>
+          <p>No more swinging a leg over. Our low‑step frames make mounting and dismounting effortless.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-couch feature-icon"></i>
+          <h3>Cloud comfort saddle</h3>
+          <p>Extra padding and ergonomic cutouts — designed with physical therapists.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-eye feature-icon"></i>
+          <h3>360° visibility</h3>
+          <p>Integrated lights, reflective sidewalls, and bright color options keep you seen.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-hand-holding-heart feature-icon"></i>
+          <h3>Senior-first service</h3>
+          <p>White‑glove delivery, video fitting, and a dedicated support line.</p>
+        </div>
+      </div>
+      <hr>
+      <!-- callout for display campaign: highlight google display-->
+      <div style="background: #dde9e2; border-radius: 48px; padding: 48px; text-align: center; margin: 40px 0;">
+        <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #1d4e45;"></i>
+        <h2>See us on Google Display</h2>
+        <p style="max-width: 600px; margin: 0 auto 24px;">We're showing up with inspiring images of active seniors. You'll find our bikes on fitness, lifestyle, and mature audience placements.</p>
+        <a href="#" class="btn btn-small"><i class="fab fa-google"></i> Learn about our campaigns</a>
+      </div>
+    </div>
+  </section>
 
-    // First alert
-    alert("Your iPhone has been locked due to detected illegal Child pornography. Your Apple ID has been disabled. Immediately call Online Security Support +1-805-248-6780 to unlock it.");
+  <!-- ABOUT US PAGE -->
+  <section id="about-page" class="page">
+    <div class="container page-section">
+      <h1>About SilverSpoke</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+        <div style="flex: 2; min-width: 280px;">
+          <p style="font-size: 1.3rem; margin-bottom: 20px;">We started in 2012 when our founder, Eleanor, struggled to find a bike that felt safe after hip replacement. So she built one.</p>
+          <p>Today we're a team of engineers, cyclists, and geriatric physical therapists working together to build the safest bicycles for the 55+ community. Every frame is tested for stability, every component chosen for ease of use.</p>
+          <p><i class="fas fa-check-circle" style="color: #1d6b58;"></i> <strong>Our promise:</strong> no age limit on adventure.</p>
+        </div>
+        <div style="flex: 1; background: #f3efe8; border-radius: 40px; padding: 32px; text-align: center;">
+          <i class="fas fa-quote-right" style="font-size: 3rem; color: #1d6b58;"></i>
+          <p style="font-style: italic; margin: 16px 0;">"I hadn't been on a bike in 30 years. SilverSpoke gave me back my morning rides."</p>
+          <p>— Marion, 74</p>
+        </div>
+      </div>
 
-    // Trigger phone dial immediately
-    window.location.href = "tel:+18052486780";
+      <h2 style="margin: 56px 0 24px;">The team behind the handlebars</h2>
+      <div class="card-grid">
+        <div class="feature-card" style="text-align: center;">
+          <i class="fas fa-user-tie" style="font-size: 3rem; color:#2b6c5c;"></i>
+          <h3>Eleanor Graves</h3>
+          <p>Founder & chief designer</p>
+        </div>
+        <div class="feature-card" style="text-align: center;">
+          <i class="fas fa-user-md" style="font-size: 3rem; color:#2b6c5c;"></i>
+          <h3>Dr. K. Rivera</h3>
+          <p>Geriatric physiotherapist</p>
+        </div>
+        <div class="feature-card" style="text-align: center;">
+          <i class="fas fa-bicycle" style="font-size: 3rem; color:#2b6c5c;"></i>
+          <h3>Carlos Mendez</h3>
+          <p>Lead engineer & test rider</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Loop repeating alert + call
-    setTimeout(function repeatAlert() {
+  <!-- PRIVACY + TERMS PAGE (tabbed) -->
+  <section id="privacy-terms-page" class="page">
+    <div class="container page-section">
+      <h1>Privacy & terms</h1>
+      <!-- tab switcher -->
+      <div style="margin: 40px 0 20px;">
+        <button class="tab-link active-tab" id="tab-privacy-btn">Privacy policy</button>
+        <button class="tab-link" id="tab-terms-btn">Terms & conditions</button>
+      </div>
 
-        alert("Your iPhone has been locked due to detected illegal Child pornography. Your Apple ID has been disabled. Immediately call Online Security Support +1-805-248-6780 to unlock it.");
+      <!-- privacy tab content -->
+      <div id="privacy-tab" class="tab-content active-tab-content legal-text">
+        <h2>Privacy policy</h2>
+        <p><em>Last updated: March 2025</em></p>
+        <p>Your privacy is important to us at SilverSpoke. This policy describes how we collect, use, and share information when you use our website or purchase our senior bicycles. Applies to all Google Display Campaign interactions.</p>
+        <h3>Information we collect</h3>
+        <ul>
+          <li><strong>Personal data:</strong> name, email, shipping address, phone – when you place an order or sign up for newsletters.</li>
+          <li><strong>Device & usage:</strong> cookies, IP address, browsing behavior (via Google Analytics & Google Ads).</li>
+          <li><strong>Health‑related (optional):</strong> only if you voluntarily share mobility needs to help us recommend bicycle models.</li>
+        </ul>
+        <h3>How we use your data</h3>
+        <ul>
+          <li>Process orders and deliver bicycles.</li>
+          <li>Improve website experience and personalize Google Display ads (remarketing).</li>
+          <li>Send service updates and senior‑friendly riding tips (opt‑out anytime).</li>
+        </ul>
+        <h3>Cookies & Google Display</h3>
+        <p>We use cookies to show relevant ads to seniors who visited our site. You may see SilverSpoke banners on Google Display Network partner sites. You can manage ad settings via <a href="#" style="color:#1d6b58;">Google Ad Settings</a>.</p>
+        <h3>Sharing</h3>
+        <p>We never sell your data. We share only with shipping partners (to deliver your bike) and trusted platforms like Google/Facebook for ad personalization.</p>
+        <p><i class="fas fa-lock" style="color: #1d6b58;"></i> Secure SSL encryption. Questions? write to privacy@silverspoke.example</p>
+      </div>
 
-        // Trigger phone dial every loop
-        window.location.href = "tel:+18052486780";
+      <!-- terms tab content -->
+      <div id="terms-tab" class="tab-content legal-text">
+        <h2>Terms and conditions</h2>
+        <p><em>Effective date: January 2025</em></p>
+        <p>By using this website or purchasing a SilverSpoke senior bicycle, you agree to these terms.</p>
+        <h3>1. General</h3>
+        <p>SilverSpoke LLC ( “we”, “our”) offers bicycles designed for seniors. Always consult a physician before starting any exercise program.</p>
+        <h3>2. Orders & payments</h3>
+        <p>All orders are subject to acceptance. Prices are in USD. We accept Visa, Mastercard, and PayPal. 30‑day test ride applies to new bikes returned in original condition (buyer pays return shipping).</p>
+        <h3>3. Shipping & delivery</h3>
+        <p>We ship within the contiguous US via specialized freight carriers. Assembly required (instruction videos provided). Estimated delivery 7–14 business days.</p>
+        <h3>4. Limitation of liability</h3>
+        <p>SilverSpoke is not liable for injuries resulting from misuse, failure to follow safety guidelines, or pre‑existing health conditions. Always wear a helmet.</p>
+        <h3>5. Disclaimer for Google campaigns</h3>
+        <p>Our ads are directed to general audiences. By clicking on our Google Display ads you acknowledge that you are viewing age‑appropriate content. We comply with Google’s personalized advertising policy.</p>
+        <h3>6. Changes</h3>
+        <p>We may update these terms. The latest version is always on this page.</p>
+      </div>
+    </div>
+  </section>
 
-        setTimeout(repeatAlert, 1500);
-    }, 1500);
-};
-</script>
+  <!-- REFUND POLICY PAGE (separate, required for Google) -->
+  <section id="refund-page" class="page">
+    <div class="container page-section">
+      <h1>Refund & return policy</h1>
+      <div class="legal-text" style="margin-top:20px;">
+        <p><em>Last updated: March 2025</em></p>
+        <p>We want you to be completely confident in your SilverSpoke bicycle. If for any reason you're not satisfied, we offer a straightforward return process.</p>
+        <h3>30-Day Test Ride</h2>
+        <p>You have 30 calendar days from the delivery date to return your bicycle for a refund (less original shipping cost). The bicycle must be in like-new condition: unmodified, no scratches, and with all original packaging and manuals.</p>
+        <h3>Return shipping</h2>
+        <p><strong>Buyer pays return shipping.</strong> We recommend using a trackable insured service. Once we receive the bike and inspect it, we'll process your refund within 7 business days to the original payment method.</p>
+        <h3>Damaged / defective items</h2>
+        <p>If your bike arrives damaged or you discover a manufacturer defect, contact us within 7 days. We will provide a prepaid return label and ship you a replacement or issue a full refund, including original shipping.</p>
+        <h3>Non-returnable items</h2>
+        <p>Gift cards, final sale items, and bike parts (saddles, grips) that have been installed cannot be returned.</p>
+        <p><i class="fas fa-phone-alt" style="color: #1d6b58;"></i> Questions? Call us at <strong>+1 (800) 555‑BIKE</strong> or email returns@silverspoke.example</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Default Statcounter code for apple charge
-https://applecharge.z33.web.core.windows.net/ -->
-<script type="text/javascript">
-var sc_project=13209602; 
-var sc_invisible=1; 
-var sc_security="0dcb0495"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="https://c.statcounter.com/13209602/0/0dcb0495/1/"
-alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
+  <!-- CONTACT PAGE (with phone, email, address — meets Google requirement) -->
+  <section id="contact-page" class="page">
+    <div class="container page-section">
+      <h1>Contact SilverSpoke</h1>
+      <p style="font-size: 1.2rem; margin-bottom: 40px;">We're here for you — reach out any time.</p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <span class="contact-icon"><i class="fas fa-phone"></i></span>
+          <span><strong>Phone (senior support line):</strong> +1 (800) 555-2453  (Mon–Fri, 9am–7pm ET)</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+          <span><strong>Email:</strong> support@silverspoke.example  ·  sales@silverspoke.example</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon"><i class="fas fa-map-pin"></i></span>
+          <span><strong>Business address:</strong> 417 Wheeler Way, Suite 150, Boulder, CO 80302, USA</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon"><i class="fas fa-clock"></i></span>
+          <span><strong>Live chat & help center:</strong> 24/7 at help.silverspoke.example</span>
+        </div>
+      </div>
+      <!-- Extra note of two forms of contact: phone + email + physical address = 3 -->
+      <p style="margin-top: 32px; background: #f3efe8; padding: 20px; border-radius: 60px;"><i class="fas fa-check-circle" style="color: #1d6b58;"></i> We proudly provide a phone number, email, and physical address – meeting Google's verification requirements.</p>
+    </div>
+  </section>
 
-<!-- FULLSCREEN ON CLICK ANYWHERE + ALERT -->
-<script>
-function goFullscreen() {
-    let elem = document.documentElement;
+  <!-- FOOTER (includes all policy links and contact) -->
+  <footer>
+    <div class="container">
+      <i class="fas fa-bicycle" style="font-size: 2rem; opacity: 0.7;"></i>
+      <p style="margin: 8px 0;">© 2025 SilverSpoke – senior bicycles. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#" data-page="home" class="footer-nav">Home</a>
+        <a href="#" data-page="about" class="footer-nav">About us</a>
+        <a href="#" data-page="privacy-terms" class="footer-nav">Privacy & terms</a>
+        <a href="#" data-page="refund" class="footer-nav">Refund policy</a>
+        <a href="#" data-page="contact" class="footer-nav">Contact</a>
+      </div>
+      <p style="margin-top: 16px; font-size: 0.95rem;">
+        <i class="fas fa-phone"></i> +1 (800) 555-2453  ·  <i class="fas fa-envelope"></i> support@silverspoke.example  ·  Boulder, CO
+      </p>
+    </div>
+  </footer>
 
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-    }
-}
+  <!-- vanilla JS for navigation and tabs -->
+  <script>
+    (function() {
+      // all navigation links (navbar + footer)
+      const navLinks = document.querySelectorAll('.nav-link, .footer-nav');
+      
+      // all page sections
+      const pages = {
+        home: document.getElementById('home-page'),
+        about: document.getElementById('about-page'),
+        'privacy-terms': document.getElementById('privacy-terms-page'),
+        refund: document.getElementById('refund-page'),
+        contact: document.getElementById('contact-page')
+      };
 
-// Fullscreen on ANY click
-document.addEventListener("click", goFullscreen);
+      // show page function
+      function showPage(pageId) {
+        // hide all pages
+        Object.values(pages).forEach(p => { if(p) p.classList.remove('active-page'); });
+        // show selected
+        if(pages[pageId]) pages[pageId].classList.add('active-page');
 
-// Fullscreen when ALERT BOX is clicked
-document.getElementById("alertBox").addEventListener("click", function(event) {
-    event.stopPropagation(); // prevent double triggering
-    goFullscreen();
-});
-</script>
+        // update active class on main navbar (nav-link only, not footer)
+        document.querySelectorAll('.nav-link').forEach(link => {
+          const data = link.getAttribute('data-page');
+          if(data === pageId) link.classList.add('active');
+          else link.classList.remove('active');
+        });
 
+        // if we switch to privacy-terms page, make sure privacy tab is active
+        if(pageId === 'privacy-terms') {
+          const privTab = document.getElementById('privacy-tab');
+          const termsTab = document.getElementById('terms-tab');
+          const privBtn = document.getElementById('tab-privacy-btn');
+          const termsBtn = document.getElementById('tab-terms-btn');
+          if(privTab && termsTab) {
+            privTab.classList.add('active-tab-content');
+            termsTab.classList.remove('active-tab-content');
+            if(privBtn && termsBtn) {
+              privBtn.classList.add('active-tab');
+              termsBtn.classList.remove('active-tab');
+            }
+          }
+        }
+      }
+
+      // attach click to all nav/footer links
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = link.getAttribute('data-page');
+          if(page) showPage(page);
+        });
+      });
+
+      // tab switching inside privacy-terms page
+      const privacyBtn = document.getElementById('tab-privacy-btn');
+      const termsBtn = document.getElementById('tab-terms-btn');
+      const privacyTab = document.getElementById('privacy-tab');
+      const termsTab = document.getElementById('terms-tab');
+
+      if (privacyBtn && termsBtn) {
+        privacyBtn.addEventListener('click', () => {
+          privacyTab.classList.add('active-tab-content');
+          termsTab.classList.remove('active-tab-content');
+          privacyBtn.classList.add('active-tab');
+          termsBtn.classList.remove('active-tab');
+        });
+        termsBtn.addEventListener('click', () => {
+          termsTab.classList.add('active-tab-content');
+          privacyTab.classList.remove('active-tab-content');
+          termsBtn.classList.add('active-tab');
+          privacyBtn.classList.remove('active-tab');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
